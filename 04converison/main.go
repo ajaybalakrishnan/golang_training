@@ -22,5 +22,6 @@ func main() {
 		fmt.Println(err)
 	} else {
 		fmt.Println("Added 1 to you rating: ", numRating+1)
+		fmt.Printf("Type of your added rating, %T \n", numRating+1)
 	}
 }
