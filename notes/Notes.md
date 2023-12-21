@@ -124,3 +124,159 @@ type User struct {
 	Age int
 }
 ```
+# Conditional Statement
+* If else is like it is in any other programming language
+```
+if loginCount < 10 {
+		result = "Regular User"
+	} else if loginCount > 10 {
+		result = "Watch Out!"
+	} else {
+		result = "Exactly 10 loging"
+	}
+```
+
+# Switch Case
+
+* Syntax for switch case
+
+```
+switch diceNumber {
+	case 1:
+		fmt.Println("Dice value is 1 and you can open")
+	case 2:
+		fmt.Println("You can move 2 spot")
+	case 3:
+		fmt.Println("You can move 3 spot")
+		fallthrough // next case is also executed
+	case 4:
+		fmt.Println("You can move 4 spot")
+	case 5:
+		fmt.Println("You can move 5 spot")
+	case 6:
+		fmt.Println("You can move 6 spot")
+	default:
+		fmt.Println("That was impossible!")
+	}
+}
+```
+* The `fallthrough` keyword executed the following case as well irrespective of the condition
+# Control Statements / Loops
+
+* loop can have multiple syntax in go
+	* it can use range keyword, 
+	* it can use var declaration and incremental statement int he for statement
+	* It can have just the control statement alone
+```
+for i := 0; i < len(days); i++ {
+ 	fmt.Println(days[i])
+}
+
+for i := range days {
+ 	fmt.Println(days[i])
+}
+
+for index, day := range days {
+	fmt.Printf("Index is %v and value is %v\n", index, day)
+}
+```
+```
+for rougueValue < 10 {
+		if rougueValue == 4 {
+			goto flag
+		}
+		if rougueValue == 5 {
+			rougueValue++
+			continue
+		} else if rougueValue == 6 {
+			break
+		}
+		fmt.Println("Value is: ", rougueValue)
+		rougueValue++
+	}
+```
+
+# Functions
+* Functions are declared with the keyword `func` the data type for the arguments needs to be declared in the function definition.
+* The return type needs to  be mentioned in the function definition if the function is returning something. It can return either single data type or multiple data types.
+```
+func adder(valOne int, valTwo int) int {
+	return valOne + valTwo
+}
+
+func proAdder(values ...int) (int, string) {
+	sum := 0
+	for _, val := range values {
+		sum = sum + val
+	}
+	return sum, "Pro result function"
+}
+```
+
+# Methods
+* Go does not have classes. However, you can define methods on types.
+* A method is a function with a special _receiver_ argument.
+* The receiver appears in its own argument list between the `func` keyword and the method name.
+
+```
+type User struct {
+	Name   string
+	Email  string
+	Status bool
+	Age    int
+}
+
+func (u User) GetStatus() {
+	fmt.Println("Is user active", u.Status)
+}
+
+func (u User) ResetMail() {
+	u.Email = "test@go.dev"
+	fmt.Println("Email Reseted to:", u.Email)
+}
+```
+
+# Defer Statement
+* Defer statements executes the control line reaches the end of the function body.
+* When the multiple defer statements are invoked, the last defered statement will be executed first. i.e LIFO (Last In First Out).
+```
+func main() {
+	defer fmt.Println("World")
+	defer fmt.Println("One")
+	defer fmt.Println("Two")
+	fmt.Println("Hello")
+
+	myDefer()
+}
+
+func myDefer() {
+	defer fmt.Print("\n")
+	for i := 0; i < 5; i++ {
+		defer fmt.Print(i)
+	}
+}
+```
+**Output**
+```
+[ajayb@localhost 17defer]$ go run main.go 
+Hello
+43210
+Two
+One
+World
+[ajayb@localhost 17defer]$
+```
+
+# Files
+* File operations is more like any it is in any other programming languages
+* In go packages `io` and `os` provides all the necessary method to modify create and remove a file
+* `defer` keyword is mostly used with `file.Close()` statement
+```
+content := "This needs to go in a file."
+file, err := os.Create(("./myfile.txt"))
+length, err := io.WriteString(file, content)
+
+databyte, err := os.ReadFile(filename)
+// err needs to be handled
+fmt.Println("Text data inside teh file is \n", string(databyte))
+```
