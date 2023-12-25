@@ -1,7 +1,30 @@
+# Headings
+
+1. [[#Short Notes]]
+2. [[#Variable declaration]]
+3. [[#User Input]]
+4. [[#Type conversion]]
+5. [[#Time in golang]]
+6. [[#Memory Management in golang]]
+7. [[#Pointers]]
+8. [[#Arrays]]
+9. [[#Slices]]
+10. [[#Loops]]
+11. [[#Structs]]
+12. [[#Conditional Statement]]
+13. [[#Switch Case]]
+14. [[#Control Statements / Loops]]
+15. [[#Functions]]
+16. [[#Methods]]
+17. [[#Defer Statement]]
+18. [[#Files]]
+19. [[#Handling web request]]
+20. [[#Handling URLs]]
+
+# Short Notes
 * Go is case sensitive
 * Variable type needs to be declared in advance
-* Everything is type.  
-
+* Everything is type. 
 # Variable declaration
 * Variables can be declared in 3 ways explicit, implicit and the walrus operator
 	* Explicit, var a int = 4
@@ -331,3 +354,4 @@ partsOfUrl := &url.URL{
 }
 anotherUrl := partsOfUrl.String()
 ```
+
