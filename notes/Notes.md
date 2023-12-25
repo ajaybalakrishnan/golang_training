@@ -21,7 +21,9 @@
 19. [[#Handling web request]]
 20. [[#Handling URLs]]
 21. [[#GET Request]]
-
+22. [[#POST Request]]
+23. [[#Handling JSON data]]
+24. [[#Handling FORM data]]
 # Short Notes
 * Go is case sensitive
 * Variable type needs to be declared in advance
@@ -375,9 +377,9 @@ fmt.Println(responseString.String())
 ```
 
 # POST Request
-## JSON data
+
 * Post Requests are handled using `web.url.Post()` function
-- It is similar to the GET request on how its being handled. But we need to provide the post data to the post request
+* It is similar to the GET request on how its being handled. But we need to provide the post data to the post request
 ```
 myposturl := "http://localhost:8000/post"
 requestBody := strings.NewReader(`
@@ -396,9 +398,10 @@ byteCount, _ := responseString.Write(content)
 
 fmt.Println(byteCount)
 fmt.Println(responseString.String())
+- 
 ```
-
-### Encode JSON
+# Handling JSON data
+## Encode JSON
 - The JSON can be constructed using `json` module along with `struct` datatype
 - `json.Marshal` Marshals any data to the the json data, whereas `json.MarshalIndent` marshals them with Indent i.e formatting the data to look like a json 
 
@@ -419,7 +422,7 @@ mycourses := []course{
 
 finalJson, err := json.MarshalIndent(mycourses, "", "\t")
 ``` 
-### Decode JSON
+## Decode JSON
 * Decoding JSON can be done via `json.Unmarshal` function.
 * When the struct is passed as an argument golang is smart enough to decode (map the alias key name to the actual struct key name) the json data
 ```
@@ -461,7 +464,8 @@ var myData map[string]interface{}
 json.Unmarshal((myJsonData), &myData)
 ```
 * NOTE  `Unmarshal` function expects the json data to be in the byte format
-## FORM data
+
+# Handling FORM data
 - In POST request  the data that is handled is a FORM data
 ```
 data := url.Values{}
