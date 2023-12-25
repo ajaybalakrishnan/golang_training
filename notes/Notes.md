@@ -280,3 +280,21 @@ databyte, err := os.ReadFile(filename)
 // err needs to be handled
 fmt.Println("Text data inside teh file is \n", string(databyte))
 ```
+
+# Handling web request
+
+* Web Requests handling is done via [http](https://pkg.go.dev/net/http) package.
+* Any of the request returns a [response](https://pkg.go.dev/net/http#Response) object
+	* This response object has all the 
+	* And this response needs to be closed by the client as it is not closed by default
+	```
+	defer response.Body.Close()
+	```
+	* The content of the body can be read like the following
+```
+	databytes, err := io.ReadAll(response.Body)
+	content := string(databytes)
+	fmt.Println(content)
+```
+-  If the network connection fails or the server terminates the response, Body.Read calls return an error.
+	
