@@ -20,6 +20,7 @@
 18. [[#Files]]
 19. [[#Handling web request]]
 20. [[#Handling URLs]]
+21. [[#GET Request]]
 
 # Short Notes
 * Go is case sensitive
@@ -353,5 +354,23 @@ partsOfUrl := &url.URL{
 	RawQuery: "course=golang&paymentid=nsjfiuefn",
 }
 anotherUrl := partsOfUrl.String()
+```
+
+# GET Request
+* Get Requests are handled using `web.url.Get()` function
+* This `Get` function provides a response. And this response needs to be closed by the caller
+```
+response, err := http.Get(myurl)
+fmt.Println("Status Code: ", response.StatusCode)
+fmt.Println("Content Length", response.ContentLength)
+```
+* This response string can be read using the `io` module. And `strings` is a package that provides you the Builder type that can be used for string manipulations
+```
+var responseString strings.Builder
+content, _ := io.ReadAll(response.Body)
+byteCount, _ := responseString.Write(content)
+
+fmt.Println(byteCount)
+fmt.Println(responseString.String())
 ```
 
