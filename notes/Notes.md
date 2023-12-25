@@ -375,6 +375,8 @@ fmt.Println(responseString.String())
 ```
 
 # POST Request
+## JSON data
+	
 * Post Requests are handled using `web.url.Post()` function
 - Its is similar to the GET request on how its being handled. But we need to provide the post data to the post request
 ```
@@ -388,6 +390,23 @@ requestBody := strings.NewReader(`
 `)
 response, err := http.Post(myurl, "application/json", requestBody)
 defer response.Body.Close()
+
+var responseString strings.Builder
+content, _ := io.ReadAll(response.Body)
+byteCount, _ := responseString.Write(content)
+
+fmt.Println(byteCount)
+fmt.Println(responseString.String())
+```
+## FORM data
+- In POST request  the data that is handled is a FORM data
+```
+data := url.Values{}
+data.Add("firstname", "ajay")
+data.Add("lastname", "balakrishnan")
+data.Add("email", "ajaybalakrishnan2@gmail.com")
+
+response, err := http.PostForm(myurl, data)
 
 var responseString strings.Builder
 content, _ := io.ReadAll(response.Body)
