@@ -29,7 +29,7 @@ func readFile(filename string) {
 	databyte, err := os.ReadFile(filename)
 	checkNilErr(err)
 
-	fmt.Println("Text data inside teh file is \n", string(databyte))
+	fmt.Println("Text data inside the file is \n", string(databyte))
 }
 
 func checkNilErr(err error) {
