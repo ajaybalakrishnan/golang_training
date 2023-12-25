@@ -12,16 +12,16 @@ func main() {
 
 	fmt.Println("Welcome to web verb")
 	// mygeturl := "http://localhost:8000/get"
-	// PerformGerRequest(mygeturl)
+	// PerformGetRequest(mygeturl)
 
 	// myposturl := "http://localhost:8000/post"
-	// PerformPostRequest(myposturl)
+	// PerformPostJsonRequest(myposturl)
 
 	mypostformurl := "http://localhost:8000/postform"
 	PerformPostFormRequest(mypostformurl)
 }
 
-func PerformGerRequest(myurl string) {
+func PerformGetRequest(myurl string) {
 
 	response, err := http.Get(myurl)
 	if err != nil {
@@ -44,7 +44,7 @@ func PerformGerRequest(myurl string) {
 	// fmt.Println(string(content))
 }
 
-func PerformPostRequest(myurl string) {
+func PerformPostJsonRequest(myurl string) {
 	requestBody := strings.NewReader(`
 		{
 			"cousrsename":"golang",
