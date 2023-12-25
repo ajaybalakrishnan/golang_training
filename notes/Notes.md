@@ -378,7 +378,7 @@ fmt.Println(responseString.String())
 ## JSON data
 	
 * Post Requests are handled using `web.url.Post()` function
-- Its is similar to the GET request on how its being handled. But we need to provide the post data to the post request
+- It is similar to the GET request on how its being handled. But we need to provide the post data to the post request
 ```
 myposturl := "http://localhost:8000/post"
 requestBody := strings.NewReader(`
@@ -398,6 +398,27 @@ byteCount, _ := responseString.Write(content)
 fmt.Println(byteCount)
 fmt.Println(responseString.String())
 ```
+
+- The JSON can be constructed using `json` module along with `struct` datatype
+- `json.Marshal` Marshals any data to the the json data, whereas `json.MarshalIndent` marshals them with Indent i.e formatting the data to look like a json 
+
+```
+type course struct {
+	Name     string `json:"coursename"`
+	Price    int
+	Platform string   `json:"mode"`
+	Password string   `json:"-"`
+	Tags     []string `json:"tags,omitempty"`
+}
+
+mycourses := []course{
+	{"ReactJS Bootcamp", 299, "justcoding.in", "abc123", []string{"web-dev", "js"}},
+	{"MERN Bootcamp", 199, "justcoding.in", "jdfhif333", []string{"fullstack", "js"}},
+	{"Angular Bootcamp", 299, "justcoding.in", "abcdjsfhd123", nil},
+}
+
+finalJson, err := json.MarshalIndent(mycourses, "", "\t")
+``` 
 ## FORM data
 - In POST request  the data that is handled is a FORM data
 ```
@@ -414,4 +435,17 @@ byteCount, _ := responseString.Write(content)
 
 fmt.Println(byteCount)
 fmt.Println(responseString.String())
+```
+
+# Aliases
+* Aliases can be used in go lang
+- These aliases are used so that we can call one name in the structs and the same data is exported with the alias name in the json
+```
+type course struct {
+	Name     string `json:"coursename"`
+	Price    int
+	Platform string   `json:"mode"`
+	Password string   `json:"-"`
+	Tags     []string `json:"tags,omitempty"`
+}
 ```
