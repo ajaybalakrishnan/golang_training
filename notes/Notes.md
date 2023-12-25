@@ -297,4 +297,37 @@ fmt.Println("Text data inside teh file is \n", string(databyte))
 	fmt.Println(content)
 ```
 -  If the network connection fails or the server terminates the response, Body.Read calls return an error.
-	
+
+# Handling URLs
+- Urls can be handled using the url module
+- Simply pass the url as a parameter to the `url.Parse()` function.
+```
+const myurl = "https://lco.dev:3000/learn?course=golang&paymentid=nsjfiuefn"
+result, _ := url.Parse(myurl)
+```
+- `Parse` function returns `*URL`. And the URL type has the below fields
+```
+type URL struct {
+	Scheme      [string](https://pkg.go.dev/builtin#string)
+	Opaque      [string](https://pkg.go.dev/builtin#string)    // encoded opaque data
+	User        *[Userinfo](https://pkg.go.dev/net/url#Userinfo) // username and password information
+	Host        [string](https://pkg.go.dev/builtin#string)    // host or host:port
+	Path        [string](https://pkg.go.dev/builtin#string)    // path (relative paths may omit leading slash)
+	RawPath     [string](https://pkg.go.dev/builtin#string)    // encoded path hint (see EscapedPath method)
+	OmitHost    [bool](https://pkg.go.dev/builtin#bool)      // do not emit empty host (authority)
+	ForceQuery  [bool](https://pkg.go.dev/builtin#bool)      // append a query ('?') even if RawQuery is empty
+	RawQuery    [string](https://pkg.go.dev/builtin#string)    // encoded query values, without '?'
+	Fragment    [string](https://pkg.go.dev/builtin#string)    // fragment for references, without '#'
+	RawFragment [string](https://pkg.go.dev/builtin#string)    // encoded fragment hint (see EscapedFragment method)
+}
+```
+- Similarly URLs can be constructed using the `url` module. 
+```
+partsOfUrl := &url.URL{
+	Scheme:   "https",
+	Host:     "lco.dev",
+	Path:     "learn",
+	RawQuery: "course=golang&paymentid=nsjfiuefn",
+}
+anotherUrl := partsOfUrl.String()
+```
