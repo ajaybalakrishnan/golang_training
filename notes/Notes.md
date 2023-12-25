@@ -376,7 +376,6 @@ fmt.Println(responseString.String())
 
 # POST Request
 ## JSON data
-	
 * Post Requests are handled using `web.url.Post()` function
 - It is similar to the GET request on how its being handled. But we need to provide the post data to the post request
 ```
@@ -399,6 +398,7 @@ fmt.Println(byteCount)
 fmt.Println(responseString.String())
 ```
 
+### Encode JSON
 - The JSON can be constructed using `json` module along with `struct` datatype
 - `json.Marshal` Marshals any data to the the json data, whereas `json.MarshalIndent` marshals them with Indent i.e formatting the data to look like a json 
 
@@ -419,6 +419,48 @@ mycourses := []course{
 
 finalJson, err := json.MarshalIndent(mycourses, "", "\t")
 ``` 
+### Decode JSON
+* Decoding JSON can be done via `json.Unmarshal` function.
+* When the struct is passed as an argument golang is smart enough to decode (map the alias key name to the actual struct key name) the json data
+```
+
+type course struct {
+	Name     string `json:"coursename"`
+	Price    int
+	Platform string   `json:"mode"`
+	Password string   `json:"-"`
+	Tags     []string `json:"tags,omitempty"`
+}
+
+myJsonData := []byte(`
+{
+	"coursename": "ReactJS Bootcamp",
+	"Price": 299,
+	"mode": "justcoding.in",
+	"tags": ["web-dev","js"]
+}
+`)
+
+var myCourse course
+checkValid := json.Valid(myJsonData)
+fmt.Println(checkValid)
+if checkValid {
+	fmt.Println("JSON was valid")
+	json.Unmarshal(myJsonData, &myCourse)
+	fmt.Printf(" %#v\n", myCourse)
+} else {
+	fmt.Println("That JSON was not valid")
+}
+
+// main.course{Name:"ReactJS Bootcamp", Price:299, Platform:"justcoding.in",  
+// Password:"", Tags:[]string{"web-dev", "js"}}
+```
+* When map is passed instead of a struct datatype, `Unmarshal` function decodes the key value part and convert it to the map data type.
+```
+var myData map[string]interface{}
+json.Unmarshal((myJsonData), &myData)
+```
+* NOTE  `Unmarshal` function expects the json data to be in the byte format
 ## FORM data
 - In POST request  the data that is handled is a FORM data
 ```
