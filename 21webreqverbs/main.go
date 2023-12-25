@@ -10,8 +10,10 @@ import (
 func main() {
 
 	fmt.Println("Welcome to web verb")
-	myurl := "http://localhost:8000/get"
-	PerformGerRequest(myurl)
+	// mygeturl := "http://localhost:8000/get"
+	// PerformGerRequest(mygeturl)
+	myposturl := "http://localhost:8000/post"
+	PerformPostRequest(myposturl)
 }
 
 func PerformGerRequest(myurl string) {
@@ -35,4 +37,26 @@ func PerformGerRequest(myurl string) {
 
 	// fmt.Println(content)
 	// fmt.Println(string(content))
+}
+
+func PerformPostRequest(myurl string) {
+	requestBody := strings.NewReader(`
+		{
+			"cousrsename":"golang",
+			"price": 1000,
+			"platform": "online"
+		}
+	`)
+	response, err := http.Post(myurl, "application/json", requestBody)
+	if err != nil {
+		panic(err)
+	}
+	defer response.Body.Close()
+
+	var responseString strings.Builder
+	content, _ := io.ReadAll(response.Body)
+	byteCount, _ := responseString.Write(content)
+
+	fmt.Println(byteCount)
+	fmt.Println(responseString.String())
 }

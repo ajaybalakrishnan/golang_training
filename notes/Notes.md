@@ -374,3 +374,25 @@ fmt.Println(byteCount)
 fmt.Println(responseString.String())
 ```
 
+# POST Request
+* Post Requests are handled using `web.url.Post()` function
+- Its is similar to the GET request on how its being handled. But we need to provide the post data to the post request
+```
+myposturl := "http://localhost:8000/post"
+requestBody := strings.NewReader(`
+	{
+		"cousrsename":"golang",
+		"price": 1000,
+		"platform": "online"
+	}
+`)
+response, err := http.Post(myurl, "application/json", requestBody)
+defer response.Body.Close()
+
+var responseString strings.Builder
+content, _ := io.ReadAll(response.Body)
+byteCount, _ := responseString.Write(content)
+
+fmt.Println(byteCount)
+fmt.Println(responseString.String())
+```
