@@ -495,3 +495,47 @@ type course struct {
 	Tags     []string `json:"tags,omitempty"`
 }
 ```
+
+# Go Mod
+* `go mod` command provides the access to the operations on the modules.
+
+- `go get` resolves its command-line arguments to packages at specific module versions,
+updates go.mod to require those versions, and downloads source code into the
+module cache.
+- This packages gets downloaded in the GOPATH.
+```
+[ajayb@localhost 23mymodule]$ go get -u github.com/gorilla/mux
+go: downloading github.com/gorilla/mux v1.8.1
+go: added github.com/gorilla/mux v1.8.1
+[ajayb@localhost 23mymodule]$ ls $GOPATH/pkg/mod/github.com/gorilla
+mux@v1.8.1
+[ajayb@localhost 23mymodule]$ echo $GOPATH
+/home/ajayb/go
+```
+- Below are the sub-commands of `go mod`.
+```
+The commands are:
+
+	download    download modules to local cache
+	edit        edit go.mod from tools or scripts
+	graph       print module requirement graph
+	init        initialize new module in current directory
+	tidy        add missing and remove unused modules
+	vendor      make vendored copy of dependencies
+	verify      verify dependencies have expected content
+	why         explain why packages or modules are needed
+```
+
+* `go mod init` initialises a new module in the current directory. This action will create a `go.mod` file which contains the lists the specific versions of the dependencies that your project uses
+```
+[ajayb@localhost 23mymodule]$ cat go.mod 
+module github.com/ajaybalakrishnan/mymodules
+
+go 1.21.5
+
+require github.com/gorilla/mux v1.8.1
+```
+* `go mod tidy` adds the missing modules to the go.mod file. At the same time, it removes the used modules from the go.mod file.
+* `go mod edit` will edit the go.mod file
+* `go mod verify` verifies the whether the modules have the expected content
+* `go mod graph` prints the module requirement graph.
