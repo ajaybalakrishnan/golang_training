@@ -539,3 +539,4 @@ require github.com/gorilla/mux v1.8.1
 * `go mod edit` will edit the go.mod file
 * `go mod verify` verifies the whether the modules have the expected content
 * `go mod graph` prints the module requirement graph.
+* `go mod vendor` creates a vendor folder and stores all the modules in that vendor directory. `go` will look into the vendor director first when the `go run -mod=vendor main.go` flag is passed
