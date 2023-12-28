@@ -132,7 +132,8 @@ func CreateMovie(w http.ResponseWriter, r *http.Request) {
 	var movie model.Netflix
 	_ = json.NewDecoder(r.Body).Decode(&movie)
 	insertOneMovie(movie)
-	json.NewEncoder(w).Encode(movie)
+	fmt.Println(movie)
+	json.NewEncoder(w).Encode("Movie inserted")
 }
 
 func MarkAsWatched(w http.ResponseWriter, r *http.Request) {
