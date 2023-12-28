@@ -540,3 +540,73 @@ require github.com/gorilla/mux v1.8.1
 * `go mod verify` verifies the whether the modules have the expected content
 * `go mod graph` prints the module requirement graph.
 * `go mod vendor` creates a vendor folder and stores all the modules in that vendor directory. `go` will look into the vendor director first when the `go run -mod=vendor main.go` flag is passed
+# Folder Structure for a go app
+
+``` mermaid
+flowchart LR
+
+id1(project-root)
+
+id2(cmd)
+id2.1(main.go)
+
+id3(internal)
+id3.1(database)
+id3.1.1(database-helpers)
+id3.2(models)
+id3.2.1(database-models)
+id3.3(configs)
+
+id4(api)
+id4.1(handlers)
+id4.1.1(router.go)
+id4.2(controller)
+id4.2.1(controller.go)
+
+id5(web)
+id5.1(static)
+id5.1.1(css)
+id5.1.2(js)
+id5.2(template)
+
+id6(scripts)
+id6.1(build.sh)
+id6.2(deploy.sh)
+
+id7(tests)
+id7.1(unit-tests)
+
+id8(README.md)
+
+
+id1 --> id2
+id1 --> id3
+id1 --> id4
+id1 --> id5
+id1 --> id6
+id1 --> id7
+id1 --> id8
+
+id2 --> id2.1
+
+id3 --> id3.1
+id3 --> id3.2
+id3 --> id3.3
+id3.1 --> id3.1.1
+id3.2 --> id3.2.1
+
+id4 --> id4.1
+id4 --> id4.2
+id4.1 --> id4.1.1
+id4.2 --> id4.2.1
+
+id5 --> id5.1
+id5.1 --> id5.1.1
+id5.1 --> id5.1.2
+id5 --> id5.2
+
+id6 --> id6.1
+id6 --> id6.2
+
+id7 --> id7.1
+```
