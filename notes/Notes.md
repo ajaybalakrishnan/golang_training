@@ -24,6 +24,7 @@
 22. [[#POST Request]]
 23. [[#Handling JSON data]]
 24. [[#Handling FORM data]]
+25. [[#Interfaces]]
 # Short Notes
 * Go is case sensitive
 * Variable type needs to be declared in advance
@@ -610,3 +611,14 @@ id6 --> id6.2
 
 id7 --> id7.1
 ```
+
+# Interfaces
+
+* An interface type is defined as a set of method signatures.
+* A value of interface type can hold any value that implements those methods.
+* An interface can have any number of functions
+* There are two kinds of types here. i.e concrete type, interface type
+* Interfaces are not generic types and they are implicit.
+
+- The functions which satisfies the interface conditions, they implements that the corresponding type implements interface type
+![[20240115161633.png]]
